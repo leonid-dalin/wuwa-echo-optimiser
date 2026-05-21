@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WuWa Echo Optimizer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header class="app-bar">
+        <h1>Echo Optimizer</h1>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="macro">Macro Strategy (MDP)</button>
+            <button class="tab-btn" data-tab="micro">Micro Comparator</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- MACRO TAB -->
+        <section id="macro-tab" class="tab-content active">
+            <div class="card">
+                <h2>Resource Valuation</h2>
+                <p class="subtitle">Assign subjective weights to your resources. (e.g., 1 EXP = 1, 1 Tuner = 1000)</p>
+                <div class="input-grid">
+                    <label>EXP Weight <input type="number" id="weight-exp" value="1"></label>
+                    <label>Tuner Weight <input type="number" id="weight-tuner" value="0"></label>
+                    <label>Shell Credit <input type="number" id="weight-shell" value="0"></label>
+                    <label>Lv0 Echo Cost <input type="number" id="weight-echo" value="1000"></label>
+                </div>
+                <button id="btn-calc-macro" class="btn-primary">Calculate Optimal Strategy</button>
+            </div>
+            <div id="macro-results" class="results-grid"></div>
+        </section>
+
+        <!-- MICRO TAB -->
+        <section id="micro-tab" class="tab-content">
+            <div class="card">
+                <h2>Gear Comparator</h2>
+                <p class="subtitle">Compare a tuning Echo against your currently equipped Echo.</p>
+                
+                <div class="comparator-grid">
+                    <div class="echo-panel">
+                        <h3>Equipped (Baseline)</h3>
+                        <div id="equipped-stats"></div>
+                    </div>
+                    <div class="echo-panel">
+                        <h3>Challenger (Tuning)</h3>
+                        <label>Current Level: 
+                            <select id="challenger-level">
+                                <option value="15">Lv 15 (2 upgrades left)</option>
+                                <option value="20">Lv 20 (1 upgrade left)</option>
+                            </select>
+                        </label>
+                        <div id="challenger-stats"></div>
+                    </div>
+                </div>
+                <button id="btn-calc-micro" class="btn-primary">Run Monte Carlo Simulation</button>
+            </div>
+            <div id="micro-results" class="card results-card"></div>
+        </section>
+    </main>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

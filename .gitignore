@@ -1,0 +1,87 @@
+### --- BUILD ARTIFACTS --- ###
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+sdist/
+wheels/
+*.egg-info/
+*.egg
+.installed.cfg
+*.so
+*.pyd
+*.whl
+
+# Rust & Maturin
+target/
+src/tournament/tcg_engine/Cargo.lock
+
+### --- VIRTUAL ENVIRONMENTS --- ###
+.Python
+[Vv]env/
+[Ee]nv/
+.venv/
+.env
+bin/
+lib/
+lib64/
+include/
+man/
+develop-eggs/
+parts/
+/var/
+
+### --- TESTING & COVERAGE --- ###
+.pytest_cache/
+.tox/
+.cache
+.coverage
+htmlcov/
+htmlconv/
+nosetests.xml
+coverage.xml
+.ipynb_checkpoints/
+
+### --- IDEs & EDITORS --- ###
+.idea/
+.vscode/
+.project
+.pydevproject
+.ropeproject
+.history/
+*.swp
+*.swo
+.mr.developer.cfg
+
+### --- OS GENERATED FILES --- ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### --- LOGS & TRANSLATIONS --- ###
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+pip-selfcheck.json
+*.mo
+*.pot
+
+### --- PROJECT SPECIFIC / SCRATCH --- ###
+/matchups/_GlobalMeta/
+temp/
+.old/
+.python-version
+docs/_build/
+
+### --- MISC --- ###
+# NOT READY YET FOR DEPLOYMENT
+tests/
+diagnose.py
+test_scraper.py
+data/extras
