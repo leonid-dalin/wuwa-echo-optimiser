@@ -78,6 +78,7 @@ temp/
 .old/
 .python-version
 docs/_build/
+private/
 
 ### --- MISC --- ###
 # NOT READY YET FOR DEPLOYMENT

@@ -3,64 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WuWa Echo Optimizer</title>
+    <meta name="description" content="A mathematical Wuthering Waves Echo optimiser. Calculate exact tuning probabilities and optimal macro strategies for your gear.">
+    <meta name="robots" content="index, follow">
+    <title>WuWa Echo Optimiser | Mathematical Gear Calculator</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header class="app-bar">
-        <h1>Echo Optimizer</h1>
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="macro">Macro Strategy (MDP)</button>
-            <button class="tab-btn" data-tab="micro">Micro Comparator</button>
+<header class="app-bar">
+    <div class="header-content">
+        <h1>Echo Optimiser</h1>
+        <p class="header-subtitle">Mathematical gear evaluation for Wuthering Waves</p>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="macro">1. Tuning Strategy (Macro)</button>
+        <button class="tab-btn" data-tab="micro">2. Echo Potential (Micro)</button>
+    </div>
+</header>
+
+<main class="container">
+    <section id="macro-tab" class="tab-content active">
+        <div class="card intro-card">
+            <h2>When to use Macro?</h2>
+            <p>Use this to define your <strong>Keep vs. Discard</strong> boundaries. It calculates whether it's statistically cheaper to keep upgrading a bad Echo or to start fresh based on the subjective value of your resources.</p>
+
+            <div class="guidance-panel">
+                <h3>How to read the data & define weights:</h3>
+                <ul>
+                    <li><strong>EXP Weight (e.g., 1):</strong> The baseline unit. Assume 1 EXP = 1 point of value.</li>
+                    <li><strong>Tuner Weight (e.g., 500):</strong> Tuners are the main bottleneck. If you'd trade 500 EXP for 1 Tuner, enter 500.</li>
+                    <li><strong>A, B, F Tiers:</strong> Your substats are grouped by quality. <strong>A = Top Tier</strong> (CRIT), <strong>B = Good</strong> (ATK%, ER), <strong>F = Dead</strong> (Flat HP, DEF).</li>
+                    <li><strong>Reading the Grid:</strong> A state like <strong>"AAB"</strong> means your Echo currently has 2 A-tier stats and 1 B-tier stat. The system calculates if pushing it to level 25 is mathematically worth the cost.</li>
+                </ul>
+            </div>
         </div>
-    </header>
 
-    <main class="container">
-        <!-- MACRO TAB -->
-        <section id="macro-tab" class="tab-content active">
-            <div class="card">
-                <h2>Resource Valuation</h2>
-                <p class="subtitle">Assign subjective weights to your resources. (e.g., 1 EXP = 1, 1 Tuner = 1000)</p>
-                <div class="input-grid">
-                    <label>EXP Weight <input type="number" id="weight-exp" value="1"></label>
-                    <label>Tuner Weight <input type="number" id="weight-tuner" value="0"></label>
-                    <label>Shell Credit <input type="number" id="weight-shell" value="0"></label>
-                    <label>Lv0 Echo Cost <input type="number" id="weight-echo" value="1000"></label>
-                </div>
-                <button id="btn-calc-macro" class="btn-primary">Calculate Optimal Strategy</button>
+        <div class="card">
+            <h2>Resource Valuation</h2>
+            <div class="input-grid">
+                <label>EXP Weight <input type="number" id="weight-exp" value="1"></label>
+                <label>Tuner Weight <input type="number" id="weight-tuner" value="500"></label>
+                <label>Shell Credit <input type="number" id="weight-shell" value="0"></label>
+                <label>Lv 0 Echo Cost <input type="number" id="weight-echo" value="2000"></label>
             </div>
-            <div id="macro-results" class="results-grid"></div>
-        </section>
+            <button id="btn-calc-macro" class="btn-primary">Calculate Optimal Path</button>
+        </div>
+        <div id="macro-results" class="results-grid"></div>
+    </section>
 
-        <!-- MICRO TAB -->
-        <section id="micro-tab" class="tab-content">
-            <div class="card">
-                <h2>Gear Comparator</h2>
-                <p class="subtitle">Compare a tuning Echo against your currently equipped Echo.</p>
-                
-                <div class="comparator-grid">
-                    <div class="echo-panel">
-                        <h3>Equipped (Baseline)</h3>
-                        <div id="equipped-stats"></div>
+    <section id="micro-tab" class="tab-content">
+        <div class="card intro-card">
+            <h2>Should I upgrade this?</h2>
+            <p>Check if a partially leveled Echo is worth your tuners. Compare it to what you currently have equipped, or set a target quality threshold.</p>
+
+            <div class="guidance-panel">
+                <h3>Tier Scaling</h3>
+                <p style="font-size: 13px; margin-bottom: 8px;">100% represents a theoretically perfect 5-stat roll based on your current character weights.</p>
+                <ul style="font-size: 13px; margin: 0; padding-left: 20px;">
+                    <li><strong style="color: #FFD700;">[WTF] Matrix Glitch (99%+):</strong> Statistically impossible.</li>
+                    <li><strong style="color: #FF8C00;">[S+] Overclocked (88%+):</strong> Near perfect.</li>
+                    <li><strong style="color: #E040FB;">[S] Resonance (77%+):</strong> Great endgame piece.</li>
+                    <li><strong style="color: var(--md-primary);">[A] Harmonic (66%+):</strong> Solid stopping point.</li>
+                    <li><strong style="color: #0288D1;">[B] Tuned (55%+):</strong> Usable placeholder.</li>
+                    <li><strong style="color: var(--md-success);">[C] Baseline (44%+):</strong> Bare minimum.</li>
+                    <li><strong style="color: var(--md-error);">[F] Dissonance (&lt;44%):</strong> Trash it.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="comparator-grid">
+                <div class="echo-panel challenger-panel">
+                    <div class="panel-header">
+                        <h3>New Echo</h3>
+                        <span class="badge badge-primary">Inventory</span>
                     </div>
-                    <div class="echo-panel">
-                        <h3>Challenger (Tuning)</h3>
-                        <label>Current Level: 
-                            <select id="challenger-level">
-                                <option value="15">Lv 15 (2 upgrades left)</option>
-                                <option value="20">Lv 20 (1 upgrade left)</option>
-                            </select>
+                    <label class="slider-label">
+                        Current Level: <strong id="ch-level-display">0</strong>
+                        <input type="range" id="challenger-level" min="0" max="25" step="5" value="0">
+                    </label>
+                    <div id="challenger-stats" class="stat-container"></div>
+                </div>
+
+                <div class="echo-panel baseline-panel">
+                    <div class="panel-header">
+                        <h3>Target to Beat</h3>
+                        <div class="radio-group">
+                            <label><input type="radio" name="baseline-type" value="equipped" checked> Equipped</label>
+                            <label><input type="radio" name="baseline-type" value="target"> Target %</label>
+                        </div>
+                    </div>
+
+                    <div id="equipped-panel">
+                        <label class="slider-label">
+                            Equipped Level: <strong id="eq-level-display">25</strong>
+                            <input type="range" id="equipped-level" min="0" max="25" step="5" value="25">
                         </label>
-                        <div id="challenger-stats"></div>
+                        <div id="equipped-stats" class="stat-container"></div>
+                    </div>
+
+                    <div id="target-panel" style="display: none;">
+                        <label class="target-input-label">
+                            Target Quality (%)
+                            <input type="number" id="target-percent" value="60" min="1" max="100">
+                        </label>
+                        <p class="helper-text">Set your stopping point. 50% is a decent placeholder, 70%+ is a great endgame piece.</p>
                     </div>
                 </div>
-                <button id="btn-calc-micro" class="btn-primary">Run Monte Carlo Simulation</button>
             </div>
-            <div id="micro-results" class="card results-card"></div>
-        </section>
-    </main>
-    <script type="module" src="js/app.js"></script>
+            <div class="action-row">
+                <button id="btn-calc-micro" class="btn-primary btn-large">Calculate Win Chance</button>
+            </div>
+        </div>
+        <div id="micro-results" class="card results-card" style="display: none;"></div>
+    </section>
+</main>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
